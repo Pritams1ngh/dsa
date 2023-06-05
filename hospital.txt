@@ -1,0 +1,60 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+
+struct patient {
+    int priority;
+    string name;
+};
+
+bool operator<(const patient& a, const patient& b) {
+    return a.priority < b.priority;
+}
+
+int main() {
+    priority_queue<patient> q;
+    int choice;
+
+    do {
+        cout << "1. Add Patient" << endl;
+        cout << "2. Serve Patient" << endl;
+        cout << "3. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: {
+                patient p;
+                cout << "Enter patient name: ";
+                cin >> p.name;
+                cout << "Enter patient priority: ";
+                cin >> p.priority;
+                q.push(p);
+                cout << "Patient added successfully." << endl;
+                break;
+            }
+
+            case 2: {
+                if (q.empty()) {
+                    cout << "No patients in the queue." << endl;
+                } else {
+                    cout << "Serving patient: " << q.top().name << endl;
+                    q.pop();
+                }
+                break;
+            }
+
+            case 3: {
+                cout << "Exiting..." << endl;
+                break;
+            }
+
+            default: {
+                cout << "Invalid choice. Please try again." << endl;
+                break;
+            }
+        }
+    } while (choice != 3);
+
+    return 0;
+}
